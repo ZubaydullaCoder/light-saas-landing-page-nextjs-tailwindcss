@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const CallToAction = () => {
   return (
-    <section className="bg-gradient-to-b from-white to-[#D2DCFF] py-24 overflow-x-clip">
+    <section className="overflow-x-clip bg-gradient-to-b from-white to-[#D2DCFF] py-24">
       <div className="container">
         <div className="section-heading relative">
           <h2 className="section-title">Sign up for free today</h2>
@@ -26,11 +26,11 @@ export const CallToAction = () => {
             className="absolute -right-[331px] -top-[19px]"
           />
         </div>
-        <div className="flex gap-2 mt-10 justify-center">
+        <div className="mt-10 flex justify-center gap-2">
           <button className="btn btn-primary">Get for free</button>
           <button className="btn btn-text gap-1">
             <span>Lern more</span>
-            <ArrowRightIcon className="h-5 w-5" />
+            <ArrowRightIcon className="size-5" />
           </button>
         </div>
       </div>
