@@ -1,3 +1,4 @@
+'use client'
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
@@ -8,7 +9,9 @@ import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
 import Image from "next/image";
-import { twMerge } from "tailwind-merge";
+import React from "react";
+import {motion} from "framer-motion"
+
 
 const testimonials = [
   {
@@ -74,15 +77,23 @@ const thirdColumn = testimonials.slice(6, 9);
 const TestimonialsColumn = (props: {
   testimonials: typeof testimonials;
   className?: string;
+  duration?: number;
 }) => {
   return (
-    <div
-      className={twMerge(
-        "flex flex-col gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]",
-        props.className
-      )}
+    <div className={props.className}>
+    <motion.div className="flex flex-col gap-6 pb-6" animate={{
+      translateY: "-50%"
+    }}
+    transition={{
+      repeat: Infinity,
+      ease: "linear",
+      repeatType: "loop",
+      duration: props.duration || 10
+    }}
     >
-      {props.testimonials.map(({ text, imageSrc, name, username }, index) => (
+      {[...new Array(2)].fill(0).map((_, index)=> (
+        <React.Fragment key={index}>
+         {props.testimonials.map(({ text, imageSrc, name, username }, index) => (
         <div key={name + index} className="card">
           <div>{text}</div>
           <div className="flex items-center gap-2 mt-5">
@@ -100,6 +111,10 @@ const TestimonialsColumn = (props: {
           </div>
         </div>
       ))}
+        </React.Fragment>
+      ))}
+     
+    </motion.div>
     </div>
   );
 };
@@ -118,15 +133,17 @@ export const Testimonials = () => {
             essential tool for users around the world.
           </p>
         </div>
-        <div className="flex justify-center gap-6">
-          <TestimonialsColumn testimonials={firstColumn} />
+        <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-10 max-h-[738px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn
             testimonials={secondColumn}
+            duration={19}
             className="hidden md:flex"
           />
           <TestimonialsColumn
             testimonials={thirdColumn}
             className="hidden lg:flex"
+            duration={17}
           />
         </div>
       </div>
